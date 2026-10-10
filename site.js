@@ -1,6 +1,12 @@
 // Copy buttons, the hero video's pause control, and the live GitHub star count.
 (() => {
   const HE = document.documentElement.lang === "he";
+
+  // The language toggle remembers the choice; a first visit from a Hebrew browser lands on /he.
+  const store = { get: () => { try { return localStorage.getItem("playmark-lang"); } catch { return null; } },
+    set: (v) => { try { localStorage.setItem("playmark-lang", v); } catch { /* private mode */ } } };
+  for (const a of document.querySelectorAll("[data-lang]")) a.addEventListener("click", () => store.set(a.dataset.lang));
+  if (!HE && !store.get() && /^he\b|^iw\b/i.test(navigator.language || "") && !location.hash) location.replace("/he");
   const L = HE ? { copy: "העתקה", copied: "הועתק", select: "לסמן ידנית", play: "הפעלה", pause: "השהיה" }
     : { copy: "Copy", copied: "Copied", select: "Select it", play: "Play", pause: "Pause" };
   for (const b of document.querySelectorAll("[data-copy]")) {

@@ -362,10 +362,13 @@ main > section + section { margin-top: clamp(72px, 9vw, 124px); }
 
 .sr-only { position: absolute; width: 1px; height: 1px; padding: 0; margin: -1px; overflow: hidden; clip: rect(0 0 0 0); white-space: nowrap; border: 0; }
 
-/* Language switch */
-.lang { font: 600 0.78rem/1 var(--mono); letter-spacing: 0.04em; color: var(--paper); text-decoration: none; border: 1px solid var(--rule-strong); padding: 6px 8px; }
-.lang:hover { border-color: var(--paper); }
-@media (max-width: 720px) { nav .lang { display: inline-block; } }
+/* Language toggle: EN | עב, on every screen size */
+.masthead-row nav { margin-inline-start: auto; }
+.lang-toggle { display: inline-flex; border: 1px solid var(--rule-strong); flex: none; }
+.lang-toggle a { font: 700 0.78rem/1 var(--mono); color: var(--paper-2); text-decoration: none; padding: 7px 10px; }
+.lang-toggle a[lang="he"] { font-family: var(--display); font-size: 0.85rem; }
+.lang-toggle a:hover { color: var(--paper); }
+.lang-toggle a[aria-current="page"] { background: var(--paper); color: var(--ink); }
 
 /* Hebrew: right to left around the page; the game, code and terminal stay left to right. */
 [dir="rtl"] body { font-family: "Frank Ruhl Libre", Georgia, serif; }
