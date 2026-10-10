@@ -1,4 +1,4 @@
-<!doctype html>
+<!DOCTYPE html>
 <html lang="en" dir="ltr">
 <head>
   <meta charset="utf-8">
@@ -52,7 +52,7 @@
           <span class="toy sun"></span><span class="toy box"></span><span class="toy peak"></span><span class="toy nut"></span>
         </div>
         <p class="deck">Press
-          <span class="keys" aria-label="Control Shift M"><kbd>Ctrl</kbd><kbd>Shift</kbd><kbd>M</kbd></span>
+          <span class="keys"><kbd>Ctrl</kbd><kbd>Shift</kbd><kbd>M</kbd></span>
           in your running Godot game. Pin what's wrong and write a line. Claude Code gets the frame, the last five seconds, the log and the code under your pin.</p>
         <div class="ctas">
           <a class="btn primary" href="#try">Try it here</a>
@@ -62,10 +62,11 @@
       </div>
       <figure class="frame hero-video">
         <span class="tag">Recorded in Godot</span>
-        <video id="hero-video" autoplay muted loop playsinline preload="metadata" poster="/media/poster.jpg" aria-label="Playmark in a toy Godot scene: a pin on the teal square, the note 'Boxy should be orange', saved; then the square turns orange and a toast says Fixed #1">
+        <video id="hero-video" autoplay muted loop playsinline preload="metadata" poster="/media/poster.jpg" aria-describedby="hero-video-desc">
           <source src="/media/hero.webm" type="video/webm">
           <source src="/media/hero.mp4" type="video/mp4">
         </video>
+        <p class="sr-only" id="hero-video-desc">Playmark in a toy Godot scene: a pin on the teal square, the note 'Boxy should be orange', saved; then the square turns orange and a toast says Fixed #1</p>
         <button class="video-toggle" type="button" data-video-toggle aria-pressed="false">Pause</button>
         <i class="crop tl"></i><i class="crop tr"></i><i class="crop bl"></i><i class="crop br"></i>
       </figure>
@@ -113,7 +114,7 @@
 
       <div class="demo" data-demo>
         <div class="demo-bar">
-          <ol class="pips" aria-label="Steps">
+          <ol class="pips">
             <li data-pip="0">Freeze</li><li data-pip="1">Pin</li><li data-pip="2">Stamp</li><li data-pip="3">Save</li><li data-pip="4">Claude</li>
           </ol>
           <button class="btn small" type="button" data-restart>Restart <kbd>Esc</kbd></button>
@@ -149,7 +150,7 @@
           <aside class="side">
             <p class="step-now" data-step-text aria-live="polite">Press <kbd>M</kbd> or Freeze to stop the frame.</p>
             <button class="btn primary" type="button" data-freeze>Freeze <kbd>M</kbd></button>
-            <div class="term" data-term aria-live="polite" aria-label="Claude Code">
+            <div class="term" data-term role="log" aria-live="polite" aria-label="Claude Code">
               <div class="term-head"><span>Claude Code</span><span>~/shapes</span></div>
               <div class="term-body" data-term-body></div>
             </div>
@@ -168,8 +169,8 @@
     <div class="real-grid">
       <figure class="frame">
         <img src="/media/thornback-mark.jpg" width="1280" height="837" loading="lazy" alt="The Playmark overlay over a Wandcraft fight: a blue box around the Thornback, the ART stamp and the note">
-        <figcaption>The mark: a box around the Thornback, ART, the note.</figcaption>
         <i class="crop tl"></i><i class="crop tr"></i><i class="crop bl"></i><i class="crop br"></i>
+        <figcaption>The mark: a box around the Thornback, ART, the note.</figcaption>
       </figure>
       <ol class="real-steps">
         <li><strong>The box found the node.</strong> <code>enemy.gd</code>, kind <code>ram</code>, with the run's state: room, wave, hp, the wand.</li>
@@ -183,10 +184,11 @@
     </figure>
     <figure class="frame real-video">
       <span class="tag">Recorded in Wandcraft</span>
-      <video muted loop playsinline preload="none" poster="/media/thornback-poster.jpg" data-lazy-video aria-label="The fight replayed after the fix: the new Thornback charges in and a toast says Fixed #1">
+      <video muted loop playsinline preload="none" poster="/media/thornback-poster.jpg" data-lazy-video aria-describedby="thornback-video-desc">
         <source src="/media/thornback.webm" type="video/webm">
         <source src="/media/thornback.mp4" type="video/mp4">
       </video>
+        <p class="sr-only" id="thornback-video-desc">The fight replayed after the fix: the new Thornback charges in and a toast says Fixed #1</p>
       <button class="video-toggle" type="button" data-lazy-toggle aria-pressed="true">Play</button>
       <i class="crop tl"></i><i class="crop tr"></i><i class="crop bl"></i><i class="crop br"></i>
     </figure>

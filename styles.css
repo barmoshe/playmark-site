@@ -357,3 +357,5 @@ main > section + section { margin-top: clamp(72px, 9vw, 124px); }
 .before-after { margin: 36px 0 0; }
 .before-after img { width: 100%; height: auto; border: 1px solid var(--rule); }
 .real-video { margin-top: 36px; }
+
+.sr-only { position: absolute; width: 1px; height: 1px; padding: 0; margin: -1px; overflow: hidden; clip: rect(0 0 0 0); white-space: nowrap; border: 0; }
