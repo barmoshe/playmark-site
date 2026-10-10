@@ -167,6 +167,31 @@
     </div>
   </section>
 
+  <!-- Watch it -->
+  <section class="watch wrap" id="watch" aria-labelledby="watch-title">
+    <p class="kicker">With sound</p>
+    <h2 id="watch-title">Watch it</h2>
+    <p class="deck narrow">Two short videos, recorded in the game. The second is the Thornback from Wandcraft, below.</p>
+    <div class="watch-grid">
+      <figure class="frame watch-video">
+        <video controls playsinline preload="none" width="1920" height="1080" poster="/media/watch-color-poster.jpg" aria-describedby="watch-1-desc">
+          <source src="/media/watch-color.mp4" type="video/mp4">
+        </video>
+        <p class="sr-only" id="watch-1-desc">Video: Boxy is pinned in the Playmark overlay with the note "Boxy should be orange", then Claude changes one line and Boxy turns orange</p>
+        <i class="crop tl"></i><i class="crop tr"></i><i class="crop bl"></i><i class="crop br"></i>
+        <figcaption>One mark, one fix: a pin on Boxy, a note, one line of code. 16 s.</figcaption>
+      </figure>
+      <figure class="frame watch-video">
+        <video controls playsinline preload="none" width="1920" height="1080" poster="/media/watch-thornback-poster.jpg" aria-describedby="watch-2-desc">
+          <source src="/media/watch-thornback.mp4" type="video/mp4">
+        </video>
+        <p class="sr-only" id="watch-2-desc">Video: a box around the Thornback in a Wandcraft fight with the note asking for a charging ram, then the redrawn Thornback and a before and after</p>
+        <i class="crop tl"></i><i class="crop tr"></i><i class="crop bl"></i><i class="crop br"></i>
+        <figcaption>Redesigning the Thornback in Wandcraft: the mark, the redraw, before and after. 23 s.</figcaption>
+      </figure>
+    </div>
+  </section>
+
   <!-- In a real game -->
   <section class="real wrap" aria-labelledby="real-title">
     <p class="kicker">In a real game</p>
@@ -281,6 +306,15 @@
       <li><strong>Triage.</strong> <code>/playmark:triage</code> fixes what you pick.</li>
       <li><strong>Commit.</strong> Then the next step.</li>
     </ol>
+    <figure class="frame newgame-video">
+      <span class="tag">Built from a blank project</span>
+      <video controls playsinline preload="none" width="1920" height="1080" poster="/media/star-dodger-poster.jpg" aria-describedby="star-dodger-desc">
+        <source src="/media/star-dodger.mp4" type="video/mp4">
+      </video>
+      <p class="sr-only" id="star-dodger-desc">Video: a blank Godot project, the first playable Star Dodger, then four marks (red meteors, a gliding ship, meteors that speed up with the score, shake and sparks on a hit), each followed by its fix</p>
+      <i class="crop tl"></i><i class="crop tr"></i><i class="crop bl"></i><i class="crop br"></i>
+      <figcaption>Star Dodger, built this way: a blank project, step 1, then four marks while playing, each fixed in one line of <code>tune.gd</code>. 55 s. The game: <a href="https://github.com/barmoshe/star-dodger">github.com/barmoshe/star-dodger</a>.</figcaption>
+    </figure>
   </section>
 
   <!-- Why -->

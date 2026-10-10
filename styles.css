@@ -409,3 +409,10 @@ main > section + section { margin-top: clamp(72px, 9vw, 124px); }
 .loop-steps kbd { font-size: 0.72em; }
 @media (max-width: 760px) { .loop-steps { grid-template-columns: 1fr 1fr; } }
 [dir="rtl"] .loop-steps li { padding: 16px 0 6px 18px; }
+
+/* Watch it: the videos with sound, with the player's own controls */
+.watch-grid { display: grid; grid-template-columns: 1fr 1fr; gap: clamp(20px, 3vw, 36px); }
+.watch-grid > * { min-width: 0; }
+@media (max-width: 900px) { .watch-grid { grid-template-columns: 1fr; } }
+.watch figcaption, .newgame-video figcaption { font: 400 0.75rem/1.4 var(--mono); color: var(--paper-2); margin-top: 10px; }
+.newgame-video { margin-top: 36px; }
