@@ -34,6 +34,18 @@
     respect();
   }
 
+  // Below-the-fold videos load and play only when seen (and not under reduced motion).
+  for (const v of document.querySelectorAll("[data-lazy-video]")) {
+    const t = v.parentElement.querySelector("[data-lazy-toggle]");
+    const show = () => { t.textContent = v.paused ? "Play" : "Pause"; t.setAttribute("aria-pressed", String(v.paused)); };
+    t.addEventListener("click", () => { v.paused ? v.play().catch(() => {}) : v.pause(); show(); });
+    v.addEventListener("play", show); v.addEventListener("pause", show);
+    new IntersectionObserver(([e]) => {
+      if (e.isIntersecting && !reduced.matches) v.play().catch(() => {});
+      else if (!e.isIntersecting) v.pause();
+    }, { threshold: 0.4 }).observe(v);
+  }
+
   const stars = document.querySelector("[data-stars]");
   if (stars) {
     fetch("https://api.github.com/repos/barmoshe/playmark")

@@ -159,6 +159,39 @@
     </div>
   </section>
 
+  <!-- In a real game -->
+  <section class="real wrap" aria-labelledby="real-title" hidden>
+    <p class="kicker">In a real game</p>
+    <h2 id="real-title">Redesigning an enemy in Wandcraft</h2>
+    <p class="deck narrow">Wandcraft is a pixel-art roguelite. Its Thornback, an enemy that charges at you, looked like a loaf of bread. One mark, mid-fight:</p>
+    <blockquote class="prompt">Redesign the Thornback: make it look like a charging ram, with curled horns, thorns along its back and a glowing eye.</blockquote>
+    <div class="real-grid">
+      <figure class="frame">
+        <img src="/media/thornback-mark.jpg" width="1280" height="837" loading="lazy" alt="The Playmark overlay over a Wandcraft fight: a blue box around the Thornback, the ART stamp and the note">
+        <figcaption>The mark: a box around the Thornback, ART, the note.</figcaption>
+        <i class="crop tl"></i><i class="crop tr"></i><i class="crop bl"></i><i class="crop br"></i>
+      </figure>
+      <ol class="real-steps">
+        <li><strong>The box found the node.</strong> <code>enemy.gd</code>, kind <code>ram</code>, with the run's state: room, wave, hp, the wand.</li>
+        <li><strong>Claude found the art.</strong> 16 rows of pixel data in <code>bestiary.gd</code>, drawn with the game's palette rules.</li>
+        <li><strong>The redraw.</strong> A hunched back, bramble spikes, a curled horn, a glowing eye.</li>
+        <li><strong>Back in the fight.</strong> "Fixed #1", and the marker stays where the mark was made.</li>
+      </ol>
+    </div>
+    <figure class="before-after">
+      <img src="/media/thornback-before-after.png" width="1280" height="420" loading="lazy" alt="Before: a flat brown loaf with three green leaves. After: a hunched beast with pale spikes, a curled horn, a glowing orange eye and a wool chest.">
+    </figure>
+    <figure class="frame real-video">
+      <span class="tag">Recorded in Wandcraft</span>
+      <video muted loop playsinline preload="none" poster="/media/thornback-poster.jpg" data-lazy-video aria-label="The fight replayed after the fix: the new Thornback charges in and a toast says Fixed #1">
+        <source src="/media/thornback.webm" type="video/webm">
+        <source src="/media/thornback.mp4" type="video/mp4">
+      </video>
+      <button class="video-toggle" type="button" data-lazy-toggle aria-pressed="true">Play</button>
+      <i class="crop tl"></i><i class="crop tr"></i><i class="crop bl"></i><i class="crop br"></i>
+    </figure>
+  </section>
+
   <!-- What Claude gets -->
   <section class="gets wrap" aria-labelledby="gets-title">
     <p class="kicker">The mark</p>

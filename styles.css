@@ -343,3 +343,17 @@ main > section + section { margin-top: clamp(72px, 9vw, 124px); }
 .sw-box { background: var(--teal); }
 .sw-peak { background: var(--pink); clip-path: polygon(50% 0, 100% 100%, 0 100%); }
 .sw-nut { background: var(--nut); clip-path: polygon(25% 4%, 75% 4%, 100% 50%, 75% 96%, 25% 96%, 0 50%); }
+
+/* In a real game */
+.prompt { margin: 0 0 28px; max-width: 860px; padding: 18px 22px; border-left: 4px solid var(--orange); background: var(--ink-2); font: 700 clamp(1.1rem, 2vw, 1.35rem)/1.4 var(--display); }
+.real-grid { display: grid; grid-template-columns: 7fr 5fr; gap: clamp(24px, 4vw, 48px); align-items: start; }
+.real-grid > * { min-width: 0; }
+@media (max-width: 900px) { .real-grid { grid-template-columns: 1fr; } }
+.real figcaption { font: 400 0.75rem/1.4 var(--mono); color: var(--paper-2); margin-top: 10px; }
+.real .frame > img { aspect-ratio: auto; }
+.real-steps { list-style: none; counter-reset: rs; margin: 0; padding: 0; border-top: 1px solid var(--rule-strong); }
+.real-steps li { counter-increment: rs; position: relative; padding: 14px 0 14px 40px; border-bottom: 1px solid var(--rule); }
+.real-steps li::before { content: counter(rs); position: absolute; left: 0; top: 10px; font: 900 1.6rem/1 var(--display); color: transparent; -webkit-text-stroke: 1px var(--blue); }
+.before-after { margin: 36px 0 0; }
+.before-after img { width: 100%; height: auto; border: 1px solid var(--rule); }
+.real-video { margin-top: 36px; }
