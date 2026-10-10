@@ -55,6 +55,15 @@
     }, { threshold: 0.4 }).observe(v);
   }
 
+  // The version follows the latest GitHub release, so a release updates the site by itself.
+  const version = document.querySelectorAll("[data-version]");
+  if (version.length) {
+    fetch("https://api.github.com/repos/barmoshe/playmark/releases/latest")
+      .then((r) => (r.ok ? r.json() : null))
+      .then((d) => { if (d && /^v\d/.test(d.tag_name)) version.forEach((el) => (el.textContent = d.tag_name)); })
+      .catch(() => {});
+  }
+
   const stars = document.querySelector("[data-stars]");
   if (stars) {
     fetch("https://api.github.com/repos/barmoshe/playmark")
