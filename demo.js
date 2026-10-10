@@ -24,17 +24,38 @@
   const toastBody = root.querySelector("[data-toast-body]");
   const stampSub = root.querySelector("[data-stamp-sub]");
   const CATS = ["Bug", "Feel", "Art", "Balance", "Idea"];
+  // Page language: the guide speaks it; the game and the terminal stay in English.
+  const HE = document.documentElement.lang === "he";
+  const T = HE ? {
+    placeholder: "מה לא בסדר?", waiting: "מחכה לסימון.",
+    freeze: "לוחצים <kbd>M</kbd> או הקפאה כדי לעצור את הפריים.",
+    pin: (n, who) => `קליק על <strong>${n}</strong>, ${who}, כדי לסמן אותו.`,
+    wrong: (h, n, who) => h ? `זה ${h}. ${n} הוא <strong>${who}</strong>.` : `לסמן את <strong>${n}</strong>, ${who}.`,
+    stamp: (why, k, c) => `${why}: לוחצים <kbd>${k}</kbd> בשביל <strong>${c}</strong>.`,
+    save: "שמירת הסימון: <kbd>Enter</kbd>.", typing: "בדמו ההערה נכתבת לבד.",
+    saved: "נשמר ב-<code>.playmark/inbox</code>. ועכשיו ב-Claude Code:",
+    done: (d) => `${d} הסמן נשאר במקום הסימון, אז אפשר לבדוק את התיקון. אפשר לנסות שינוי אחר למעלה.`,
+  } : {
+    placeholder: "What did you notice?", waiting: "Waiting for a mark.",
+    freeze: "Press <kbd>M</kbd> or Freeze to stop the frame.",
+    pin: (n, who) => `Click <strong>${n}</strong>, ${who}, to pin it.`,
+    wrong: (h, n, who) => h ? `That's ${h}. ${n} is <strong>${who}</strong>.` : `Pin <strong>${n}</strong>, ${who}.`,
+    stamp: (why, k, c) => `${why}: press <kbd>${k}</kbd> for <strong>${c}</strong>.`,
+    save: "Save the mark: <kbd>Enter</kbd>.", typing: "The note writes itself in this demo.",
+    saved: "Saved to <code>.playmark/inbox</code>. Over in Claude Code:",
+    done: (d) => `${d} The marker stays where you pinned it, so you can check the fix. Try another change above.`,
+  };
   // Three fixed runs. Each is one mark and one line in look.gd.
   const SCENARIOS = {
-    color: { target: 1, cat: 2, who: "the teal square", note: "Boxy should be orange", why: "It's about color",
+    color: { target: 1, cat: 2, who: HE ? "הריבוע הטורקיז" : "the teal square", note: HE ? "Boxy צריך להיות כתום" : "Boxy should be orange", why: HE ? "זה עניין של צבע" : "It's about color",
       line: 7, del: '"color": "#2EC4B6"', add: '"color": "#FF8A1F"', body: "Boxy: #2EC4B6 → #FF8A1F in look.gd",
-      done: "Boxy is orange." },
-    shape: { target: 2, cat: 2, who: "the pink triangle", note: "Pointy should be a star", why: "It's about the look",
+      done: HE ? "Boxy כתום." : "Boxy is orange." },
+    shape: { target: 2, cat: 2, who: HE ? "המשולש הוורוד" : "the pink triangle", note: HE ? "לעצב מחדש את Pointy: כוכב עם חמישה קודקודים" : "Redesign Pointy: make it a five-point star.", why: HE ? "זה עניין של מראה" : "It's about the look",
       line: 8, del: '"kind": "triangle"', add: '"kind": "star"', body: "Pointy: triangle → star in look.gd",
-      done: "Pointy is a star." },
-    motion: { target: 3, cat: 1, who: "the blue hexagon", note: "Nutty only spins. Make it hop.", why: "It's about how it moves",
+      done: HE ? "Pointy הוא כוכב." : "Pointy is a star." },
+    motion: { target: 3, cat: 1, who: HE ? "המשושה הכחול" : "the blue hexagon", note: HE ? "ש-Nutty יקפוץ במקום להסתובב" : "Make Nutty hop instead of spinning.", why: HE ? "זה עניין של תנועה" : "It's about how it moves",
       line: 9, del: '"motion": "spin"', add: '"motion": "hop"', body: "Nutty: spin → hop in look.gd",
-      done: "Nutty hops now." },
+      done: HE ? "Nutty קופץ עכשיו." : "Nutty hops now." },
   };
   let sc = SCENARIOS.color;
 
@@ -224,13 +245,13 @@
     $("[data-toast]").classList.remove("show");
     $("[data-stamp]").classList.remove("go");
     chips.forEach((c) => { c.disabled = true; c.classList.remove("on", "hint"); });
-    note.className = "note"; note.innerHTML = '<span class="placeholder">What did you notice?</span>';
+    note.className = "note"; note.innerHTML = `<span class="placeholder">${T.placeholder}</span>`;
     deck.classList.remove("on");
     saveBtn.disabled = true;
     freezeBtn.disabled = false; freezeBtn.hidden = false;
-    termBody.innerHTML = '<p class="term-empty">Waiting for a mark.</p>';
+    termBody.innerHTML = `<p class="term-empty">${T.waiting}</p>`;
     setStep(0);
-    say("Press <kbd>M</kbd> or Freeze to stop the frame.");
+    say(T.freeze);
   }
 
   function freeze() {
@@ -241,7 +262,7 @@
     freezeBtn.disabled = true; deck.classList.add("on");
     setStep(1);
     coachAt(target().x, Y);
-    say(`Click <strong>${target().name}</strong>, ${sc.who}, to pin it.`);
+    say(T.pin(target().name, sc.who));
   }
 
   function tryPin(x, y) {
@@ -249,19 +270,19 @@
     const hit = shapes.find((s) => Math.hypot(x - s.x, y - Y) < R + 6);
     if (hit !== target()) {
       play("nope");
-      say(hit ? `That's ${hit.name}. ${target().name} is <strong>${sc.who}</strong>.` : `Pin <strong>${target().name}</strong>, ${sc.who}.`);
+      say(T.wrong(hit && hit.name, target().name, sc.who));
       return;
     }
     pin = { x, y }; play("pop");
     coach.classList.remove("show"); stage.classList.remove("can-pin");
     chips.forEach((c) => (c.disabled = false)); chips[sc.cat].classList.add("hint");
     setStep(2);
-    say(`${sc.why}: press <kbd>${sc.cat + 1}</kbd> for <strong>${CATS[sc.cat].toUpperCase()}</strong>.`);
+    say(T.stamp(sc.why, sc.cat + 1, CATS[sc.cat].toUpperCase()));
   }
 
   function stampCat(i) {
     if (step !== 2) return;
-    if (i !== sc.cat) { play("nope"); say(`${sc.why}: <kbd>${sc.cat + 1}</kbd> for <strong>${CATS[sc.cat].toUpperCase()}</strong>.`); return; }
+    if (i !== sc.cat) { play("nope"); say(T.stamp(sc.why, sc.cat + 1, CATS[sc.cat].toUpperCase())); return; }
     chips.forEach((c, k) => { c.classList.toggle("on", k === sc.cat); c.classList.remove("hint"); c.disabled = true; });
     play("chip");
     note.classList.add("typing"); note.textContent = "";
@@ -270,9 +291,9 @@
     const type = () => {
       note.textContent = sc.note.slice(0, n); note.appendChild(caret);
       if (n++ < sc.note.length) later(45, type);
-      else { saveBtn.disabled = false; setStep(3); say("Save the mark: <kbd>Enter</kbd>."); saveBtn.focus({ preventScroll: true }); }
+      else { saveBtn.disabled = false; setStep(3); say(T.save); saveBtn.focus({ preventScroll: true }); }
     };
-    say("The note writes itself in this demo.");
+    say(T.typing);
     type();
   }
 
@@ -285,7 +306,7 @@
     const st = $("[data-stamp]"); st.classList.remove("go"); void st.offsetWidth; st.classList.add("go");
     later(220, () => play("stamp"));
     setStep(4);
-    say("Saved to <code>.playmark/inbox</code>. Over in Claude Code:");
+    say(T.saved);
     termBody.innerHTML = "";
     term("hook", `Playmark: 1 new mark from playtesting (${CATS[sc.cat].toLowerCase()}: "${sc.note}").`, 700);
     term("you", "/playmark:triage", 1300);
@@ -311,7 +332,7 @@
     $("[data-toast]").classList.add("show"); play("fixed");
     pips.forEach((p) => { p.classList.add("done"); p.classList.remove("now"); });
     step = 5;
-    say(`${sc.done} The marker stays where you pinned it, so you can check the fix. Try another change above.`);
+    say(T.done(sc.done));
     later(5000, () => $("[data-toast]").classList.remove("show"));
   }
 

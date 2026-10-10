@@ -17,4 +17,4 @@ jobs:
       - name: Links, copy rules, metadata
         run: node scripts/check.mjs
       - name: HTML validates
-        run: npx --yes html-validate@9 index.html
+        run: npx --yes html-validate@9 index.html he/index.html

@@ -1,15 +1,18 @@
 // Copy buttons, the hero video's pause control, and the live GitHub star count.
 (() => {
+  const HE = document.documentElement.lang === "he";
+  const L = HE ? { copy: "העתקה", copied: "הועתק", select: "לסמן ידנית", play: "הפעלה", pause: "השהיה" }
+    : { copy: "Copy", copied: "Copied", select: "Select it", play: "Play", pause: "Pause" };
   for (const b of document.querySelectorAll("[data-copy]")) {
     b.addEventListener("click", async () => {
       const text = b.parentElement.querySelector("[data-cmd]").textContent;
       try {
         await navigator.clipboard.writeText(text);
-        b.textContent = "Copied";
+        b.textContent = L.copied;
         b.classList.add("done");
-        setTimeout(() => { b.textContent = "Copy"; b.classList.remove("done"); }, 1600);
+        setTimeout(() => { b.textContent = L.copy; b.classList.remove("done"); }, 1600);
       } catch {
-        b.textContent = "Select it";
+        b.textContent = L.select;
       }
     });
   }
@@ -18,7 +21,7 @@
   const toggle = document.querySelector("[data-video-toggle]");
   const reduced = matchMedia("(prefers-reduced-motion: reduce)");
   const sync = () => {
-    toggle.textContent = video.paused ? "Play" : "Pause";
+    toggle.textContent = video.paused ? L.play : L.pause;
     toggle.setAttribute("aria-pressed", String(video.paused));
   };
   const respect = () => {
@@ -37,7 +40,7 @@
   // Below-the-fold videos load and play only when seen (and not under reduced motion).
   for (const v of document.querySelectorAll("[data-lazy-video]")) {
     const t = v.parentElement.querySelector("[data-lazy-toggle]");
-    const show = () => { t.textContent = v.paused ? "Play" : "Pause"; t.setAttribute("aria-pressed", String(v.paused)); };
+    const show = () => { t.textContent = v.paused ? L.play : L.pause; t.setAttribute("aria-pressed", String(v.paused)); };
     t.addEventListener("click", () => { v.paused ? v.play().catch(() => {}) : v.pause(); show(); });
     v.addEventListener("play", show); v.addEventListener("pause", show);
     new IntersectionObserver(([e]) => {
