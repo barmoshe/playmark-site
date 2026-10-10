@@ -267,6 +267,22 @@
     <p class="small-print">Without Claude Code, copy <code>addons/playmark</code> into your project and enable it in Project Settings, Plugins. Updates: <code>claude plugin update playmark</code>.</p>
   </section>
 
+  <!-- Start a new game -->
+  <section class="newgame wrap" id="new" aria-labelledby="new-title">
+    <p class="kicker">From nothing</p>
+    <h2 id="new-title">Start a new game with it</h2>
+    <p class="deck narrow">A blank Godot project with Playmark already in it: one playable scene, a <code>CLAUDE.md</code> that teaches the loop, and a first commit. Say what game to build, play each step, mark what's off.</p>
+    <ol class="cmds">
+      <li><code data-cmd>/playmark:new star-dodger --name "Star Dodger"</code><button type="button" class="copy" data-copy>Copy</button></li>
+    </ol>
+    <ol class="loop-steps">
+      <li><strong>Build a step.</strong> One mechanic, one enemy, one screen.</li>
+      <li><strong>Play it.</strong> <kbd>Ctrl</kbd><kbd>Shift</kbd><kbd>M</kbd> on whatever is off.</li>
+      <li><strong>Triage.</strong> <code>/playmark:triage</code> fixes what you pick.</li>
+      <li><strong>Commit.</strong> Then the next step.</li>
+    </ol>
+  </section>
+
   <!-- Why -->
   <section class="why wrap" aria-labelledby="why-title">
     <h2 id="why-title" class="kicker">Why</h2>

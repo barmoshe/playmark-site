@@ -400,3 +400,12 @@ main > section + section { margin-top: clamp(72px, 9vw, 124px); }
   [dir="rtl"] .steps li:nth-child(n) { padding: 22px 0; border-left: 0; }
   [dir="rtl"] .feature-grid li:nth-child(n) { padding: 20px 0; border-right: 0; }
 }
+
+/* Start a new game */
+.loop-steps { list-style: none; counter-reset: ls; margin: 22px 0 0; padding: 0; display: grid; grid-template-columns: repeat(4, 1fr); gap: 0; border-top: 1px solid var(--rule); }
+.loop-steps li { counter-increment: ls; padding: 16px 18px 6px 0; font: 500 1rem/1.4 var(--display); color: var(--paper-2); }
+.loop-steps li::before { content: counter(ls); display: block; font: 900 1.6rem/1 var(--display); color: transparent; -webkit-text-stroke: 1px var(--blue); margin-bottom: 8px; }
+.loop-steps strong { color: var(--paper); }
+.loop-steps kbd { font-size: 0.72em; }
+@media (max-width: 760px) { .loop-steps { grid-template-columns: 1fr 1fr; } }
+[dir="rtl"] .loop-steps li { padding: 16px 0 6px 18px; }
